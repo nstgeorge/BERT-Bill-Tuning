@@ -1,0 +1,9 @@
+progress
+numpy
+pandas
+sklearn
+transformers
+torch==1.8.1+cu111
+requests
+slate3k
+beaker
