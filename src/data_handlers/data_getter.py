@@ -90,7 +90,7 @@ class APIManager:
         # slate doesn't like wb+, so we have to re-open the file :(
         with open("tmp.pdf", "rb") as tmp:
             reader = slate.PDF(tmp)
-            content = ''.join(reader).replace("\n", " ").replace("-", "")
+            content = ''.join(reader).replace("\n", " ")#.replace("-", "")
 
         # Remove versioning data from content
         content = re.sub(r'VerDate ((?!VerDate).)*?\f\d*', "", content)
@@ -179,7 +179,7 @@ class APIManager:
     def __legiscan_call(self, endpoint, *args):
         '''Generalized function for calling LegiScan API endpoints.'''
         if legiscan_key is None:
-            return "LegiScan API key is not defined. Please set the LEGISCAN_KEY environment variable to a valid API key."
+            raise EnvironmentError("LegiScan API key is not defined. Please set the LEGISCAN_KEY environment variable to a valid API key.")
 
         self.legiscan_call_count += 1
 
@@ -196,7 +196,7 @@ class APIManager:
     def __propublica_call(self, endpoint, *args):
         '''Call the given path within the Propublica API, starting after the API version (v1).'''
         if propublica_key is None:
-            return "ProPublica API key is not defined. Please set the PROPUBLICA_KEY environment variable to a valid API key."
+            raise EnvironmentError("ProPublica API key is not defined. Please set the PROPUBLICA_KEY environment variable to a valid API key.")
 
         url="https://api.propublica.org/congress/v1/{endpoint}".format(endpoint=endpoint)
         
@@ -218,7 +218,7 @@ def _test():
         print(api.get_bill_list(10)[1]['bill_id'])
 
     def _test_bill_text():
-        txt = api.get_bill_text(1502653)
+        txt = api.get_bill_text(api.get_bill_list(2)[1]['bill_id'])
 
     def _test_bill_subject():
         bills = api.get_bill_list(10)
@@ -227,7 +227,7 @@ def _test():
 
     #_test_bill_list()
     #_test_bill_text()
-    _test_bill_subject()
+    #_test_bill_subject()
 
 # Main code ----------------------------------------------------------
 
@@ -259,3 +259,4 @@ if __name__ == "__main__":
         os.makedirs('raw_data')
 
     build_dataset(2000, "raw_data/dataset.p")
+    #_test()

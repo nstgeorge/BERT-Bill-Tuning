@@ -32,7 +32,7 @@ if __name__ == "__main__":
 
     # args = parser.parse_args()
 
-    dp = DataPreprocessor("dataset.p")
+    dp = DataPreprocessor("raw_data/dataset.p")
     dp.remove_all_empty()
     dp.drop_subject_below_count(45)
     data = dp.get_data()

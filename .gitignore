@@ -3,3 +3,4 @@ models/
 pickles/
 raw_data/
 .vscode/
+src/__pycache__/
