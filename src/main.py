@@ -21,7 +21,7 @@ from torch import cuda
 
 MAX_LEN = 128
 BATCH_SIZE = None
-EPOCHS = 30
+EPOCHS = 2
 LEARNING_RATE = 2e-02
 
 DATA_PATH = "clean_data/transformer_ready_data_1229.p"
@@ -124,6 +124,8 @@ if __name__ == "__main__":
 
     NUM_OUT = len(data.subject.unique())
 
+    print("Subject count in training set: {}".format(NUM_OUT))
+
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 
     print("Splitting data into chunks...")
@@ -139,7 +141,7 @@ if __name__ == "__main__":
                     }
 
     test_params = {'batch_size': BATCH_SIZE,
-                    'shuffle': True,
+                    'shuffle': False,
                     #'drop_last': True,
                     'collate_fn': collate_by_document,
                     'num_workers': 0
@@ -161,9 +163,9 @@ if __name__ == "__main__":
         loss = train(model, training_loader, optimizer, 10)
         print(f'Epoch: {epoch}, Loss:  {loss.item()}')  
         guess, targs = validation(model, testing_loader)
+        print("GUESS TENSOR: {}".format(guess))
         guesses = torch.max(guess, dim=1)
-        targets = torch.max(targs, dim=0)
-        print(guesses, targets)
+        print(guesses, targs)
         print('Accuracy on test set: {}'.format(accuracy_score(guesses.indices, targs)))
     
     if not os.path.exists('models'):
