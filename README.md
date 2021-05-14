@@ -2,7 +2,7 @@
 
 ## Environment Setup
 
-This project requires Python. Once installed, you can install the dependencies by running the following command inside the project folder:
+This project requires Python 3.8.1. Once installed, you can install the dependencies by running the following command inside the project folder:
 
 ```
 python -m pip install -r requirements.txt
