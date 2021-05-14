@@ -14,7 +14,7 @@ Place each API key in environment variables called `LEGISCAN_KEY` and `OPENSECRE
 
 ## Running the Code
 
-> Please note that this code was designed with the assumption that I would be the only one running it -- some files still have debug printing, some are being changed often, and some might not work at all for you, since I can only test on my own hardware.
+> Please note that this code was written on a relatively short time scale for the given task -- some files still have debug printing, some are being changed often, and some might not work at all for you, since I can only test on my own hardware.
 > None of the files have argparse, any changes will have to be done in code for now.
 > Proceed with caution.
 
