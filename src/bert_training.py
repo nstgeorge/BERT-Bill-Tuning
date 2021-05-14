@@ -85,10 +85,6 @@ class MultiLabelChunkedDataset(MultiLabelDataset):
         self.result_targets = []
         pool = mp.Pool(mp.cpu_count() - 1)
 
-        # split each document into strings of max size max_len with appropriate subjects
-        # for ind, doc in enumerate(df.content.values):
-        #     pool.starmap(self.__split_doc, doc, df.subject[ind], max_len))
-
         print("DataFrame loader: Generating size {} chunks across {} processes...".format(math.ceil(df.shape[0] / (mp.cpu_count() - 1)), mp.cpu_count() - 1))
 
         prepared_data = df.values.tolist()
